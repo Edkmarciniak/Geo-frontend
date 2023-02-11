@@ -1,29 +1,13 @@
 import InputText from "./components/form/input-text";
+import InputPassword from "./components/form/input-password";
 
 function App() {
   return (
     <form className="mt-4 flex flex-col items-center gap-y-2">
       <InputText />
-      <label htmlFor="password" className="sr-only">
-        Password{" "}
-      </label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        className="rounded"
-      />
 
-      <label htmlFor="confirmPassword" className="sr-only">
-        Confirm Password
-      </label>
-      <input
-        type="password"
-        id="confirmPassword"
-        placeholder="Confirm Password"
-        className="rounded"
-      />
+      <InputPassword />
+      <InputPassword />
 
       <button
         type="submit"
