@@ -1,6 +1,7 @@
 export default function InputText() {
   return (
-    <label htmlFor="name" className="sr-only">
+    <>
+      <label htmlFor="name" className="sr-only">
         Name
       </label>
       <input
@@ -10,6 +11,6 @@ export default function InputText() {
         placeholder="Name"
         className="rounded"
       />
-  )
+    </>
+  );
 }
-   
