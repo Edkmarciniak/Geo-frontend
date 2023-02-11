@@ -1,6 +1,9 @@
+import InputText from "./components/form/input-text";
+
 function App() {
   return (
     <form className="mt-4 flex flex-col items-center gap-y-2">
+      <InputText />
       <label htmlFor="password" className="sr-only">
         Password{" "}
       </label>
