@@ -10,10 +10,10 @@ export default {
       })
       .json();
   },
-  getStudents() {
-    return ky.get(`${BASE_URL}/students`).json();
+  getUsers() {
+    return ky.get(`${BASE_URL}/shipwrecks`).json();
   },
-  createStudent(data) {
-    return ky.post(`${BASE_URL}/students`, { json: data }).json();
+  createUser(data) {
+    return ky.post(`${BASE_URL}/users`, { json: data }).json();
   },
 };
