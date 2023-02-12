@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginRegister from "./routes/login-register";
-import Students from "./routes/students";
+import Users from "./routes/users";
 import { apiService } from "./services";
 
 const router = createBrowserRouter([
@@ -11,10 +11,10 @@ const router = createBrowserRouter([
 
   // TODO: Protect this route (check for a jwt)
   {
-    path: "/students",
-    element: <Students />,
+    path: "/users",
+    element: <Users />,
     loader() {
-      return apiService.getStudents();
+      return apiService.getUsers();
     },
 
     async action(postSubmission) {
@@ -27,9 +27,9 @@ const router = createBrowserRouter([
       const data = Object.fromEntries(formData);
 
       // Send the data to the server
-      const newStudent = await apiService.createStudent(data);
+      const newUser = await apiService.createUsers(data);
 
-      return { newStudent };
+      return { newUser };
     },
   },
 ]);
