@@ -1,5 +1,5 @@
 import InputText from "./components/form/input-text";
-import Button from "./components/form/button";
+import Button from "./components/button";
 
 function App() {
   return (
