@@ -13,7 +13,7 @@ function App() {
         type="password"
       />
 
-      <Button text="Submit" />
+      <Button text="Enter" />
     </form>
   );
 }
