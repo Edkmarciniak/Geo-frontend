@@ -1,41 +1,28 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginRegister from "./routes/login-register";
-import Users from "./routes/users";
-import { apiService } from "./services";
+import { useEffect, useState } from "react";
+import { shipfinderApiService } from "./services";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LoginRegister />,
-  },
+export default function App() {
+  const [ships, setShips] = useState([]);
 
-  // TODO: Protect this route (check for a jwt)
-  {
-    path: "/users",
-    element: <Users />,
-    loader() {
-      return apiService.getUsers();
+  // This runs once when the component mounts
+  useEffect(
+    () => {
+      shipfinderApiService.getShips().then((ships) => setShips(ships));
     },
 
-    async action(postSubmission) {
-      const { request } = postSubmission;
+    // This is an empty array, so it only runs once
+    []
+  );
 
-      // Read the request body as form data
-      const formData = await request.formData();
+  // TODO: Look at the MUI Table (or whatever) and figure out how to use it
 
-      // Turn the form data into a plain object
-      const data = Object.fromEntries(formData);
-
-      // Send the data to the server
-      const newUser = await apiService.createUsers(data);
-
-      return { newUser };
-    },
-  },
-]);
-
-function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ul>
+      {ships.map((ship) => (
+        <li key={ship.id}>
+          {ship.latdec}, {ship.longdec}
+        </li>
+      ))}
+    </ul>
+  );
 }
-
-export default App;
