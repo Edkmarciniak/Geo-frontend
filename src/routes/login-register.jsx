@@ -5,7 +5,6 @@ import * as yup from "yup";
 import Button from "../components/button";
 import Error from "../components/error";
 import InputText from "../components/form/input-text";
-import apiService from "../services/api";
 
 export default function LoginRegister() {
   const [isRegistering, setIsRegistering] = useState(true);
