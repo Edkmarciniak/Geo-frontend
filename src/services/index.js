@@ -1,2 +1,1 @@
-export { default as userApiService } from "./user-api";
-export { default as shipfinderApiService } from "./shipfinder-api";
+export { default as shipwrecksApi } from "./shipwrecks-api";
