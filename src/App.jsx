@@ -2,10 +2,8 @@ import { Icon } from "leaflet";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Marker } from "react-leaflet/Marker";
-import { createBrowserRouter } from "react-router-dom";
 import ShipwreckForm from "./components/shipwreck-form";
 import marker from "./pindrop.svg";
-import LoginRegister from "./routes/login-register";
 import { shipwrecksApi } from "./services";
 
 const renderMarkers = ({ data, selectedShipwreckType, icon }) => {
@@ -21,11 +19,6 @@ const renderMarkers = ({ data, selectedShipwreckType, icon }) => {
       );
     });
 };
-
-const router = createBrowserRouter([
-  { path: "/", component: LoginRegister },
-  { path: "/app", component: App },
-]);
 
 function App() {
   const [data, setData] = useState(null);
