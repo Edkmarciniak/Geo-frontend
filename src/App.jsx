@@ -1,28 +1,73 @@
+import { Icon } from "leaflet";
 import { useEffect, useState } from "react";
-import { shipfinderApiService } from "./services";
+import { MapContainer, TileLayer } from "react-leaflet";
+import { Marker } from "react-leaflet/Marker";
+import ShipwreckForm from "./components/shipwreck-form";
+import marker from "./pindrop.svg";
+import { shipwrecksApi } from "./services";
 
-export default function App() {
-  const [ships, setShips] = useState([]);
+const renderMarkers = ({ data, selectedShipwreckType, icon }) => {
+  return data
+    .filter((shipwreck) => shipwreck.feature_type === selectedShipwreckType)
+    .map((shipwreck) => {
+      return (
+        <Marker
+          key={shipwreck._id}
+          position={[shipwreck.latdec, shipwreck.londec]}
+          icon={icon}
+        ></Marker>
+      );
+    });
+};
 
-  // This runs once when the component mounts
-  useEffect(
-    () => {
-      shipfinderApiService.getShips().then((ships) => setShips(ships));
-    },
+function App() {
+  const [data, setData] = useState(null);
 
-    // This is an empty array, so it only runs once
-    []
+  // This is the state that will be updated when the user selects a shipwreck type
+  const [selectedShipwreckType, setSelectedShipwreckType] = useState(
+    "Wrecks - Submerged, dangerous"
   );
 
-  // TODO: Look at the MUI Table (or whatever) and figure out how to use it
+  useEffect(() => {
+    shipwrecksApi
+      .index()
+      .then((data) => {
+        setData(data);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  }, []);
+
+  const icon = new Icon({
+    iconUrl: marker,
+    iconSize: [24, 24],
+  });
 
   return (
-    <ul>
-      {ships.map((ship) => (
-        <li key={ship.id}>
-          {ship.latdec}, {ship.longdec}
-        </li>
-      ))}
-    </ul>
+    <main>
+      <ShipwreckForm
+        value={selectedShipwreckType}
+        setValue={setSelectedShipwreckType}
+      />
+      {data && (
+        <MapContainer
+          center={[0, 0]}
+          zoom={2}
+          scrollWheelZoom={false}
+          style={{
+            height: "100vh",
+          }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {renderMarkers({ data, selectedShipwreckType, icon })}
+        </MapContainer>
+      )}
+    </main>
   );
 }
+
+export default App;
