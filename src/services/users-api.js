@@ -14,7 +14,7 @@ export default {
   },
   signIn({ username, password }) {
     return ky
-      .post(`${VITE_BASE_URL}/users/${isRegistering ? "register" : "login"}`, {
+      .post(`${VITE_BASE_URL}/users/${"enter, login"}`, {
         json: { username, password },
       })
       .json();
