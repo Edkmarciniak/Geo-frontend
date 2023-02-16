@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Marker } from "react-leaflet/Marker";
 import ShipwreckForm from "./components/shipwreck-form";
+import SignInForm from "./components/sign-in";
 import marker from "./pindrop.svg";
 import { shipwrecksApi } from "./services";
 
@@ -46,6 +47,7 @@ function App() {
 
   return (
     <main>
+      <SignInForm />
       <ShipwreckForm
         value={selectedShipwreckType}
         setValue={setSelectedShipwreckType}
