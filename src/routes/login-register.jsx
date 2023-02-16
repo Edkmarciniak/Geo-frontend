@@ -61,7 +61,7 @@ export default function LoginRegister() {
         }
       })
       .catch((error) => {
-        handleError(error);
+        handleError(error); 
       });
   };
 
@@ -101,7 +101,7 @@ export default function LoginRegister() {
           </InputText>
         )}
 
-        <Button type="submit" text={isRegistering ? "Sign Up" : "Login"} />
+        <Button type="submit" text={ "Enter, "Login"} />
 
         <button
           type="reset"
